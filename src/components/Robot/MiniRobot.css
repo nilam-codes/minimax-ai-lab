@@ -1,0 +1,733 @@
+/* ==========================================================================
+   MINI ROBOT — STYLES & VECTOR ANIMATIONS
+   Dark Futuristic Companion Mascot
+   ========================================================================== */
+
+.mini-robot-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  user-select: none;
+}
+
+.mini-robot-svg {
+  filter: drop-shadow(0 10px 25px rgba(22, 139, 255, 0.35));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: visible;
+}
+
+/* Robot Sizing */
+.robot-size-small .mini-robot-svg {
+  width: 120px;
+  height: 140px;
+}
+
+.robot-size-medium .mini-robot-svg {
+  width: 170px;
+  height: 195px;
+}
+
+.robot-size-large .mini-robot-svg {
+  width: 250px;
+  height: 285px;
+}
+
+/* Base Motion & Expression Layers (Prevents Glitching & Transform Snapping) */
+.mini-robot-motion-base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.mini-robot-motion-base.robot-floating {
+  animation: cuteIdleBounce 3.2s infinite ease-in-out;
+}
+
+.mini-robot-expression-layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cuteIdleBounce {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1, 1);
+  }
+  35% {
+    transform: translateY(-8px) rotate(1.2deg) scale(0.98, 1.02);
+  }
+  65% {
+    transform: translateY(-10px) rotate(-1.2deg) scale(0.97, 1.03);
+  }
+  85% {
+    transform: translateY(-2px) rotate(0.4deg) scale(1.02, 0.98);
+  }
+}
+
+/* Expressions */
+.mini-robot-expression-layer.expression-confused {
+  animation: headTiltCute 2.2s infinite ease-in-out;
+}
+
+@keyframes headTiltCute {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-4px) rotate(8deg);
+  }
+  70% {
+    transform: translateY(-2px) rotate(6deg);
+  }
+}
+
+.mini-robot-expression-layer.expression-excited {
+  animation: robotExcitedBounce 0.5s infinite alternate cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+@keyframes robotExcitedBounce {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-12px) scale(1.05) rotate(1.8deg);
+  }
+}
+
+/* 1. Winning Celebration Animation */
+.mini-robot-expression-layer.expression-winning {
+  animation: robotCelebrationBounce 0.45s infinite alternate cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+@keyframes robotCelebrationBounce {
+  0% {
+    transform: translateY(0) scale(1) rotate(-1deg);
+  }
+  100% {
+    transform: translateY(-16px) scale(1.06) rotate(2deg);
+  }
+}
+
+/* Losing / Sad Droop */
+.mini-robot-expression-layer.expression-losing {
+  animation: robotDroopSad 2s infinite ease-in-out;
+}
+
+@keyframes robotDroopSad {
+  0%, 100% {
+    transform: translateY(2px) scale(0.98);
+  }
+  50% {
+    transform: translateY(6px) scale(0.96) rotate(-1deg);
+  }
+}
+
+/* Natural Cute Eye Blinking with Subtle Looking Around */
+.eye-blink {
+  animation: cuteBlink 3.8s infinite ease-in-out;
+  transform-origin: 100px 72px;
+}
+
+@keyframes cuteBlink {
+  0%, 93%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.08);
+  }
+}
+
+/* Cute Cheek Blush Glow */
+.cute-blush {
+  animation: blushPulse 2.8s infinite alternate ease-in-out;
+}
+
+@keyframes blushPulse {
+  0% { opacity: 0.55; }
+  100% { opacity: 0.85; filter: drop-shadow(0 0 5px rgba(244, 114, 182, 0.5)); }
+}
+
+/* Star Sparkle Twinkle for Excited / Winning */
+.star-sparkle {
+  animation: starTwinkle 1.2s infinite alternate ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes starTwinkle {
+  0% { transform: scale(0.85) rotate(0deg); opacity: 0.8; }
+  100% { transform: scale(1.15) rotate(18deg); opacity: 1; }
+}
+
+/* 2. Losing / Drooping Shoulders & Head Drop */
+.expression-losing {
+  animation: robotSadSlump 3s infinite ease-in-out;
+}
+
+@keyframes robotSadSlump {
+  0%, 100% {
+    transform: translateY(4px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-3deg);
+  }
+}
+
+/* 3. Draw / Relaxed Posture */
+.expression-draw {
+  animation: robotDrawRelax 3.5s infinite ease-in-out;
+}
+
+@keyframes robotDrawRelax {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+/* 4. Analysing / Facing Holographic Display */
+.expression-analysing {
+  animation: robotAnalyseFocus 2.8s infinite ease-in-out;
+}
+
+@keyframes robotAnalyseFocus {
+  0%, 100% {
+    transform: translateY(0) rotate(2.5deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(3.5deg);
+  }
+}
+
+/* 5. Pointing towards Target */
+.expression-pointing {
+  animation: robotPointLean 2.4s infinite ease-in-out;
+}
+
+@keyframes robotPointLean {
+  0%, 100% {
+    transform: translateY(0) translateX(2px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-6px) translateX(4px) rotate(3deg);
+  }
+}
+
+/* Visible Animated Teardrops */
+.robot-teardrop {
+  animation: tearDrop 1.8s infinite ease-in;
+  transform-origin: top center;
+}
+
+.tear-left {
+  animation-delay: 0s;
+}
+
+.tear-right {
+  animation-delay: 0.9s;
+}
+
+@keyframes tearDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(4px) scale(1);
+  }
+  80% {
+    opacity: 0.85;
+    transform: translateY(18px) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(26px) scale(0.4);
+  }
+}
+
+.arm-thumbs-up {
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
+}
+
+.arm-pointing {
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.45));
+}
+
+/* Eye Blinking Animation */
+.eye-blink {
+  animation: eyeBlinkAnim 4.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes eyeBlinkAnim {
+  0%, 46%, 50%, 100% {
+    transform: scaleY(1);
+  }
+  48% {
+    transform: scaleY(0.08);
+  }
+}
+
+/* Visor Scanner for Thinking Mode */
+.visor-scanner-beam {
+  animation: scannerSweep 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes scannerSweep {
+  0% {
+    transform: translateX(-28px);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(28px);
+    opacity: 0.3;
+  }
+}
+
+/* Core Arc Reactor Pulse */
+.robot-core-pulse {
+  animation: corePulse 2s infinite ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes corePulse {
+  0%, 100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 4px #00F0FF);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px #00F0FF);
+  }
+}
+
+/* Ion Thruster Glow */
+.thruster-glow {
+  animation: thrusterFlicker 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes thrusterFlicker {
+  0% {
+    transform: scaleY(0.85);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scaleY(1.2);
+    opacity: 0.95;
+  }
+}
+
+/* Interactive Cursor */
+.robot-clickable {
+  cursor: pointer;
+}
+
+.robot-clickable:hover .mini-robot-svg {
+  transform: scale(1.05);
+  filter: drop-shadow(0 12px 35px rgba(0, 240, 255, 0.5));
+}
+
+.robot-clickable:active .mini-robot-svg {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   ENERGY FLARE ANIMATION (Fingertip laser spark)
+   ========================================================================== */
+.energy-flare {
+  animation: flareAnim 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes flareAnim {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px #00F0FF);
+  }
+}
+
+/* ==========================================================================
+   ROBOT DIALOGUE BUBBLE — Cute Rounded Speech Balloon
+   ========================================================================== */
+.robot-dialogue-bubble {
+  position: relative;
+  background: rgba(18, 27, 49, 0.95);
+  border: 1.5px solid rgba(192, 132, 252, 0.35);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4), 0 0 20px rgba(192, 132, 252, 0.16), inset 0 0 14px rgba(56, 189, 248, 0.08);
+  border-radius: 18px;
+  padding: 13px 16px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+/* Cute speech bubble pointer */
+.robot-dialogue-bubble.placement-top::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgba(18, 27, 49, 0.95);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+.robot-dialogue-bubble.placement-bottom::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(18, 27, 49, 0.95);
+}
+
+.dialogue-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(192, 132, 252, 0.15);
+  padding-bottom: 5px;
+}
+
+.dialogue-speaker-name {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #F8FAFC;
+}
+
+.dialogue-text {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #FFFFFF;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Corner futuristic accents */
+.dialogue-tick-tl {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid var(--accent-cyan);
+  border-left: 2px solid var(--accent-cyan);
+}
+
+.dialogue-tick-br {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 6px;
+  height: 6px;
+  border-bottom: 2px solid var(--accent-cyan);
+  border-right: 2px solid var(--accent-cyan);
+}
+
+.voice-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-toggle-btn:hover {
+  filter: drop-shadow(0 0 6px var(--accent-cyan));
+}
+
+/* ==========================================================================
+   ROBOT COMPANION PANEL (Beside Board in Main Dashboard)
+   ========================================================================== */
+.robot-companion-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  background: rgba(14, 22, 43, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.companion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.companion-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 12px 0;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   MODAL 3-COLUMN CINEMATIC STAGE LAYOUT
+   ========================================================================== */
+.modal-stage-layout {
+  display: grid;
+  grid-template-columns: 290px 1fr 340px;
+  gap: 22px;
+  align-items: start;
+}
+
+@media (max-width: 1360px) {
+  .modal-stage-layout {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+@media (max-width: 980px) {
+  .modal-stage-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal-robot-host-col {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.robot-spotlight-halo {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, rgba(56, 189, 248, 0.12) 45%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.robot-host-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 18px;
+  background: linear-gradient(180deg, rgba(28, 42, 68, 0.92) 0%, rgba(18, 28, 48, 0.96) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.38);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 240, 255, 0.15);
+  border-radius: var(--radius-xl);
+  gap: 14px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.robot-host-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.robot-host-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.08em;
+}
+
+.robot-host-avatar-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.mini-telemetry-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(8, 14, 28, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.mini-telemetry-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   MOVE EXECUTION LASER BEAM ANIMATION
+   ========================================================================== */
+.laser-beam-container {
+  position: absolute;
+  top: 55%;
+  left: 65%;
+  width: 280px;
+  height: 4px;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.laser-beam-line {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #FFFFFF, #00F0FF, rgba(0, 240, 255, 0));
+  box-shadow: 0 0 12px #00F0FF, 0 0 24px #00F0FF;
+  animation: laserShoot 0.7s ease-out forwards;
+}
+
+@keyframes laserShoot {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  30% {
+    width: 100%;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 100%;
+  }
+}
+
+.cell-laser-hit {
+  animation: cellLaserPulse 0.8s ease-out forwards !important;
+  box-shadow: 0 0 35px #00F0FF, inset 0 0 20px #00F0FF !important;
+  border-color: #00F0FF !important;
+}
+
+@keyframes cellLaserPulse {
+  0% {
+    transform: scale(1);
+    background: rgba(0, 240, 255, 0.8);
+  }
+  50% {
+    transform: scale(1.08);
+    background: rgba(0, 240, 255, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    background: var(--bg-surface-2);
+  }
+}
+
+/* ==========================================================================
+   PRESENTATION MODE ROBOT CARD
+   ========================================================================== */
+.presentation-robot-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(14, 22, 43, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+}
+
+.presentation-robot-dialogue {
+  flex: 1;
+}
+
+.presentation-subtitle-text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   ROBOT EYE TRACKING, WAVING & DRAWING GESTURES
+   ========================================================================== */
+
+.look-left {
+  transform: translateX(-4.5px);
+  transition: transform 0.22s ease-out;
+}
+
+.look-right {
+  transform: translateX(4.5px);
+  transition: transform 0.22s ease-out;
+}
+
+/* Introduction arm waving animation */
+@keyframes cuteWaveHand {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-24deg);
+  }
+}
+
+.arm-wave-active {
+  transform-origin: 148px 136px;
+  animation: cuteWaveHand 0.5s infinite ease-in-out;
+}
+
+/* Drawing stylus pulsation */
+@keyframes stylusPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px #00F0FF);
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 16px #00F0FF);
+  }
+}
+
+.arm-drawing-stylus {
+  transform-origin: 148px 140px;
+  animation: stylusPulse 0.4s infinite alternate ease-in-out;
+}
+

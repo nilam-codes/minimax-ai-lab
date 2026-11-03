@@ -1,0 +1,421 @@
+/* ==========================================================================
+   MINIMAX AI LAB — GAME BOARD STYLES
+   ========================================================================== */
+
+.game-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Match Status Banner */
+.game-status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.status-active-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+/* 3x3 Grid Board — Cute Arcade Matrix */
+.board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 0;
+}
+
+.tictactoe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 102px);
+  grid-template-rows: repeat(3, 102px);
+  gap: 12px;
+  background: rgba(18, 27, 49, 0.75);
+  padding: 16px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid rgba(192, 132, 252, 0.25);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5), 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 24px rgba(56, 189, 248, 0.1);
+  position: relative;
+}
+
+.presentation-mode .tictactoe-grid {
+  grid-template-columns: repeat(3, 126px);
+  grid-template-rows: repeat(3, 126px);
+  gap: 14px;
+  padding: 20px;
+}
+
+.board-cell {
+  background: rgba(25, 36, 64, 0.7);
+  border: 1.5px solid rgba(56, 189, 248, 0.22);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  overflow: hidden;
+}
+
+.board-cell:hover:not(:disabled) {
+  background: rgba(33, 46, 80, 0.9);
+  border-color: var(--cute-sky);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+  transform: scale(1.04) translateY(-2px);
+}
+
+.board-cell:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.board-cell:disabled {
+  cursor: not-allowed;
+}
+
+.cell-coord {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.cell-symbol {
+  font-family: var(--font-display);
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.presentation-mode .cell-symbol {
+  font-size: 60px;
+}
+
+/* X Symbol (Soft Sky Blue with Cute Pop) */
+.symbol-x {
+  color: var(--cute-sky);
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.8), 0 0 30px var(--cute-sky-glow);
+  animation: cuteSymbolPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* O Symbol (Soft Mint Green with Cute Pop) */
+.symbol-o {
+  color: var(--cute-mint);
+  text-shadow: 0 0 16px rgba(52, 211, 153, 0.8), 0 0 30px var(--cute-mint-glow);
+  animation: cuteSymbolPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Winning Cell Highlight with Sparkles */
+.cell-winning {
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.24) 0%, rgba(56, 189, 248, 0.18) 100%) !important;
+  border-color: #34D399 !important;
+  box-shadow: 0 0 30px rgba(52, 211, 153, 0.55), inset 0 0 18px rgba(52, 211, 153, 0.25) !important;
+  animation: cuteWinPulse 1.4s infinite alternate ease-in-out;
+}
+
+.cell-ai-best-preview {
+  border-color: var(--cute-lavender) !important;
+  background: rgba(192, 132, 252, 0.14) !important;
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.35);
+  animation: previewPulse 1.6s infinite alternate ease-in-out;
+}
+
+@keyframes cuteSymbolPop {
+  0% { transform: scale(0.2) rotate(-12deg); opacity: 0; }
+  55% { transform: scale(1.28) rotate(6deg); }
+  80% { transform: scale(0.94) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes cuteWinPulse {
+  0% { box-shadow: 0 0 18px rgba(52, 211, 153, 0.4); transform: scale(1); }
+  100% { box-shadow: 0 0 35px rgba(52, 211, 153, 0.85); transform: scale(1.02); }
+}
+
+@keyframes previewPulse {
+  0% { box-shadow: 0 0 10px rgba(192, 132, 252, 0.2); }
+  100% { box-shadow: 0 0 24px rgba(192, 132, 252, 0.6); }
+}
+
+/* Configuration Bar */
+.game-controls-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.config-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface-2);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  font-size: 13px;
+}
+
+.toggle-group {
+  display: flex;
+  background: var(--bg-surface-1);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  border: 1px solid var(--border-subtle);
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  box-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+.game-action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   AI PHYSICAL CELL TARGETING & DRAWING STROKE ANIMATIONS
+   ========================================================================== */
+
+/* AI Cell Targeting Reticle */
+.cell-ai-targeted {
+  border-color: var(--cute-sky) !important;
+  background: rgba(56, 189, 248, 0.16) !important;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5) !important;
+  animation: cellTargetPulse 1.2s infinite alternate ease-in-out !important;
+}
+
+@keyframes cellTargetPulse {
+  0% { box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); border-color: rgba(56, 189, 248, 0.5); }
+  100% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.8); border-color: var(--cute-sky); }
+}
+
+.cell-target-reticle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.reticle-pulse {
+  width: 48px;
+  height: 48px;
+  border: 1.5px dashed var(--cute-sky);
+  border-radius: 50%;
+  animation: reticleSpin 3s linear infinite;
+}
+
+@keyframes reticleSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.reticle-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--cute-sky);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* Progressive Drawing Symbol Animation */
+.cell-drawing-active {
+  border-color: var(--cute-pink) !important;
+  background: rgba(244, 114, 182, 0.12) !important;
+  box-shadow: 0 0 25px rgba(244, 114, 182, 0.5) !important;
+}
+
+.drawing-symbol-container {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.animated-draw-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 12px rgba(52, 211, 153, 0.8));
+}
+
+/* Progressive Circle (O) Drawing */
+.draw-path-circle {
+  stroke: var(--cute-mint);
+  stroke-width: 6.5;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: drawStrokeO 0.55s ease-in-out forwards;
+}
+
+@keyframes drawStrokeO {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Progressive Cross (X) Drawing */
+.draw-path-line1 {
+  stroke: var(--cute-sky);
+  stroke-width: 6.5;
+  stroke-linecap: round;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: drawStrokeX1 0.28s ease-out forwards;
+}
+
+.draw-path-line2 {
+  stroke: var(--cute-sky);
+  stroke-width: 6.5;
+  stroke-linecap: round;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: drawStrokeX2 0.28s ease-out 0.25s forwards;
+}
+
+@keyframes drawStrokeX1 {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawStrokeX2 {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.drawing-sparkle-tip {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: var(--cute-yellow);
+  font-size: 16px;
+  animation: starTwinkle 0.4s infinite alternate;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   FORCE AI MOVE — BOARD STYLES
+   ========================================================================== */
+.board-force-mode .tictactoe-grid {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.15), inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.cell-force-selectable {
+  background: rgba(245, 158, 11, 0.08) !important;
+  border: 1.5px dashed rgba(245, 158, 11, 0.6) !important;
+  cursor: pointer !important;
+  animation: pulseForceSelectable 1.8s infinite alternate ease-in-out;
+}
+
+.cell-force-selectable:hover {
+  background: rgba(245, 158, 11, 0.22) !important;
+  border-color: #FBBF24 !important;
+  border-style: solid !important;
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.5) !important;
+  transform: scale(1.06) translateY(-2px);
+}
+
+@keyframes pulseForceSelectable {
+  0% {
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+  }
+}
+
+.cell-force-badge {
+  position: absolute;
+  bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #FBBF24;
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 2px 6px;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.cell-pending-forced {
+  background: rgba(236, 72, 153, 0.22) !important;
+  border: 2px solid #EC4899 !important;
+  box-shadow: 0 0 32px rgba(236, 72, 153, 0.6) !important;
+  animation: pendingPulse 1s infinite alternate;
+}
+
+@keyframes pendingPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+  }
+  100% {
+    transform: scale(1.04);
+    box-shadow: 0 0 34px rgba(236, 72, 153, 0.7);
+  }
+}
+
+.cell-pending-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.marker-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #EC4899, #F59E0B);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.6);
+}
+
+
+

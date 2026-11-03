@@ -1,0 +1,442 @@
+/* ==========================================================================
+   MINIMAX AI LAB — CUTE AI ARCADE GLOBAL STYLES
+   Theme: Playful Cute AI Arcade Companion & Simulator
+   ========================================================================== */
+
+:root {
+  /* Deep Navy & Charcoal Arcade Canvas */
+  --bg-core: #0C1222;
+  --bg-surface-1: #121A2E;
+  --bg-surface-2: #19233D;
+  --bg-surface-3: #212E4F;
+  --bg-card: rgba(18, 26, 46, 0.92);
+
+  /* Cute Pastel Arcade Accents */
+  --cute-sky: #38BDF8;
+  --cute-sky-glow: rgba(56, 189, 248, 0.35);
+  --cute-sky-dim: rgba(56, 189, 248, 0.14);
+
+  --cute-lavender: #C084FC;
+  --cute-lavender-glow: rgba(192, 132, 252, 0.35);
+  --cute-lavender-dim: rgba(192, 132, 252, 0.14);
+
+  --cute-pink: #F472B6;
+  --cute-pink-glow: rgba(244, 114, 182, 0.35);
+  --cute-pink-dim: rgba(244, 114, 182, 0.14);
+
+  --cute-mint: #34D399;
+  --cute-mint-glow: rgba(52, 211, 153, 0.35);
+  --cute-mint-dim: rgba(52, 211, 153, 0.14);
+
+  --cute-peach: #FB923C;
+  --cute-peach-glow: rgba(251, 146, 60, 0.35);
+  --cute-peach-dim: rgba(251, 146, 60, 0.14);
+
+  --cute-yellow: #FBBF24;
+  --cute-yellow-glow: rgba(251, 191, 36, 0.35);
+
+  /* Backward Compatibility Aliases */
+  --accent-blue: #38BDF8;
+  --accent-blue-bright: #7DD3FC;
+  --accent-blue-glow: rgba(56, 189, 248, 0.35);
+  --accent-blue-dim: rgba(56, 189, 248, 0.14);
+
+  --accent-cyan: #2DD4BF;
+  --accent-cyan-glow: rgba(45, 212, 191, 0.35);
+
+  --accent-green: #34D399;
+  --accent-green-glow: rgba(52, 211, 153, 0.35);
+
+  --accent-red: #FB7185;
+  --accent-red-glow: rgba(251, 113, 133, 0.35);
+
+  --accent-amber: #FBBF24;
+
+  --border-subtle: rgba(56, 189, 248, 0.18);
+  --border-active: rgba(192, 132, 252, 0.45);
+  --border-bright: #38BDF8;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-cyan: #7DD3FC;
+
+  --font-display: 'Chakra Petch', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Extra Friendly Rounded Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.22);
+  --shadow-glow-lg: 0 0 35px rgba(192, 132, 252, 0.3);
+  --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 18px rgba(56, 189, 248, 0.08);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-core);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1) 0%, transparent 55%),
+    radial-gradient(circle at 85% 65%, rgba(192, 132, 252, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 15% 75%, rgba(244, 114, 182, 0.05) 0%, transparent 45%),
+    linear-gradient(rgba(56, 189, 248, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Soft Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface-1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface-3);
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cute-sky);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* Typography Utilities */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Cute Arcade Cyber Panel */
+.cyber-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(14px);
+  position: relative;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.cyber-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), rgba(192, 132, 252, 0.4), rgba(244, 114, 182, 0.3), transparent);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  pointer-events: none;
+}
+
+.cyber-panel:hover {
+  border-color: rgba(192, 132, 252, 0.35);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.5), 0 0 25px rgba(192, 132, 252, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Glowing text and borders */
+.glow-text-blue {
+  text-shadow: 0 0 12px var(--accent-blue-glow);
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 12px var(--accent-cyan-glow);
+}
+
+.glow-text-pink {
+  text-shadow: 0 0 12px var(--cute-pink-glow);
+}
+
+.glow-text-lavender {
+  text-shadow: 0 0 12px var(--cute-lavender-glow);
+}
+
+.glow-border {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 18px var(--accent-blue-glow);
+}
+
+/* Status Badges — Pastel Palette */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.badge-online {
+  background: rgba(52, 211, 153, 0.14);
+  color: #34D399;
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+.badge-blue {
+  background: var(--accent-blue-dim);
+  color: var(--accent-blue-bright);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.badge-cyan {
+  background: rgba(45, 212, 191, 0.12);
+  color: #2DD4BF;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+}
+
+.badge-pink {
+  background: var(--cute-pink-dim);
+  color: var(--cute-pink);
+  border: 1px solid rgba(244, 114, 182, 0.35);
+}
+
+.badge-lavender {
+  background: var(--cute-lavender-dim);
+  color: var(--cute-lavender);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+}
+
+.badge-mint {
+  background: var(--cute-mint-dim);
+  color: var(--cute-mint);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+.badge-peach {
+  background: var(--cute-peach-dim);
+  color: var(--cute-peach);
+  border: 1px solid rgba(251, 146, 60, 0.35);
+}
+
+.badge-red {
+  background: rgba(251, 113, 133, 0.14);
+  color: #FB7185;
+  border: 1px solid rgba(251, 113, 133, 0.35);
+}
+
+.badge-amber {
+  background: rgba(251, 191, 36, 0.14);
+  color: #FBBF24;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+}
+
+.badge-optimal {
+  background: rgba(52, 211, 153, 0.18);
+  color: #34D399;
+  border: 1px solid #34D399;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.3);
+}
+
+/* Pulsing Dot */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+/* Cute Command Buttons */
+.btn-cmd {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.btn-cmd:hover {
+  background: var(--bg-surface-3);
+  border-color: var(--accent-blue-bright);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.22);
+  transform: translateY(-1.5px);
+}
+
+.btn-cmd:active {
+  transform: scale(0.96) translateY(0);
+}
+
+.btn-cmd-primary {
+  background: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);
+  border-color: #7DD3FC;
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px var(--cute-sky-glow);
+}
+
+.btn-cmd-primary:hover {
+  background: linear-gradient(135deg, #0369A1 0%, #0284C7 100%);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.45);
+  transform: translateY(-2px);
+}
+
+.btn-cmd-lavender {
+  background: linear-gradient(135deg, #9333EA 0%, #C084FC 100%);
+  border-color: #E9D5FF;
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px var(--cute-lavender-glow);
+}
+
+.btn-cmd-lavender:hover {
+  background: linear-gradient(135deg, #7E22CE 0%, #9333EA 100%);
+  box-shadow: 0 8px 24px rgba(192, 132, 252, 0.45);
+  transform: translateY(-2px);
+}
+
+.btn-cmd-danger {
+  background: rgba(251, 113, 133, 0.16);
+  border-color: rgba(251, 113, 133, 0.4);
+  color: #FB7185;
+}
+
+.btn-cmd-danger:hover {
+  background: rgba(251, 113, 133, 0.26);
+  border-color: #FB7185;
+  box-shadow: 0 0 15px var(--accent-red-glow);
+}
+
+.btn-cmd-icon {
+  padding: 8px;
+  border-radius: var(--radius-md);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Cute Pop-in with Bounce */
+@keyframes cutePopIn {
+  0% { transform: scale(0.3) rotate(-6deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+  85% { transform: scale(0.96) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.animate-pop-in {
+  animation: cutePopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Cute Thinking Pulse Dots */
+.cute-thinking-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.cute-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--cute-sky);
+  animation: cuteDotPulse 1.2s infinite ease-in-out;
+}
+
+.cute-dot:nth-child(2) {
+  animation-delay: 0.2s;
+  background-color: var(--cute-pink);
+}
+
+.cute-dot:nth-child(3) {
+  animation-delay: 0.4s;
+  background-color: var(--cute-mint);
+}
+
+@keyframes cuteDotPulse {
+  0%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+}
+
+/* Accessibility: Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .robot-floating,
+  .antenna-bobbing,
+  .robot-swaying,
+  .thruster-glow,
+  .mini-dock-mascot:hover {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+

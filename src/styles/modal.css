@@ -1,0 +1,1335 @@
+/* ==========================================================================
+   MINIMAX AI LAB — CINEMATIC 7-STAGE AI THINKING MODAL STYLES
+   Dark Futuristic AI Command Centre / Research Lab
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(8, 14, 26, 0.88);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-container {
+  width: min(96vw, 1560px);
+  height: min(94vh, 960px);
+  /* Softer, neutral futuristic AI laboratory background */
+  background: radial-gradient(circle at 18% 25%, rgba(38, 56, 88, 0.72) 0%, rgba(22, 33, 54, 0.96) 48%, #111726 100%),
+              linear-gradient(135deg, #1A263C 0%, #121A28 100%);
+  border: 1px solid rgba(56, 189, 248, 0.38);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 50px rgba(22, 139, 255, 0.22), inset 0 0 60px rgba(26, 42, 72, 0.35);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+}
+
+@keyframes modalPop {
+  0% {
+    transform: scale(0.95) translateY(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 16px 24px;
+  background: rgba(22, 33, 54, 0.95);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.modal-icon-badge {
+  width: 48px;
+  height: 48px;
+  background: var(--accent-blue-dim);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue-bright);
+  box-shadow: 0 0 18px var(--accent-blue-glow);
+}
+
+.modal-heading {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+}
+
+.modal-subtitle {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-cyan);
+  letter-spacing: 0.05em;
+}
+
+.modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-execute-optimal {
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 20px var(--accent-blue-glow);
+}
+
+.badge-move-pill {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   STAGE NAVIGATION & TRACKER PILLS
+   ========================================================================== */
+.stage-tracker-banner {
+  padding: 12px 24px;
+  background: rgba(24, 36, 60, 0.9);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stage-tracker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stages-pills-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.stage-pill-btn {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.stage-pill-btn:hover {
+  background: var(--bg-surface-3);
+  border-color: var(--accent-blue);
+}
+
+.stage-pill-btn.active {
+  background: var(--accent-blue-dim);
+  border-color: var(--accent-blue-bright);
+  box-shadow: 0 0 12px var(--accent-blue-glow);
+}
+
+.stage-pill-btn.completed {
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.stage-num-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.stage-pill-btn.active .stage-num-circle {
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  border-color: var(--accent-blue-bright);
+  box-shadow: 0 0 8px var(--accent-blue-glow);
+}
+
+.stage-pill-btn.completed .stage-num-circle {
+  background: rgba(16, 185, 129, 0.25);
+  color: #34D399;
+  border-color: #10B981;
+}
+
+.stage-pill-label {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   STAGE CONTENT PANELS
+   ========================================================================== */
+.modal-body-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 28px;
+  background: radial-gradient(circle at 14% 35%, rgba(42, 64, 102, 0.3) 0%, transparent 60%),
+              linear-gradient(180deg, rgba(20, 30, 48, 0.5) 0%, rgba(14, 21, 35, 0.85) 100%);
+}
+
+/* ==========================================================================
+   MODAL 3-COLUMN ARCHITECTURE (LEFT: ROBOT, CENTRE & RIGHT: STAGE ARENA)
+   ========================================================================== */
+.modal-stage-layout {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .modal-stage-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal-robot-host-col {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.robot-host-card {
+  position: relative;
+  background: rgba(18, 27, 44, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-xl);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 240, 255, 0.05);
+  overflow: hidden;
+}
+
+.robot-host-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  padding-bottom: 10px;
+}
+
+.robot-host-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.06em;
+}
+
+.robot-host-avatar-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 195px;
+}
+
+.mini-telemetry-box {
+  width: 100%;
+  background: rgba(10, 16, 28, 0.8);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mini-telemetry-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.modal-stage-main-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* MINI Move Execution Laser beam effect */
+.laser-beam-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.laser-beam-line {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 250px;
+  height: 3px;
+  background: linear-gradient(90deg, #00F0FF, rgba(0, 240, 255, 0));
+  box-shadow: 0 0 10px #00F0FF, 0 0 20px #00F0FF;
+  animation: laserPulse 0.4s infinite alternate;
+  transform-origin: left center;
+}
+
+@keyframes laserPulse {
+  0% { opacity: 0.6; transform: scaleY(1); }
+  100% { opacity: 1; transform: scaleY(2.5); }
+}
+
+.cell-laser-hit {
+  border-color: #00F0FF !important;
+  background: rgba(0, 240, 255, 0.25) !important;
+  box-shadow: 0 0 30px #00F0FF, inset 0 0 20px #00F0FF !important;
+  animation: laserHitPulse 0.3s infinite alternate !important;
+}
+
+@keyframes laserHitPulse {
+  0% { transform: scale(0.98); }
+  100% { transform: scale(1.03); }
+}
+
+.stage-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stage-banner-desc {
+  background: linear-gradient(90deg, rgba(22, 139, 255, 0.14), rgba(0, 240, 255, 0.04));
+  border-left: 4px solid var(--accent-blue-bright);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ==========================================================================
+   SPLIT ARENA: CENTRE VISUALS + RIGHT MINIMAX TELEMETRY
+   ========================================================================== */
+.stage-split-arena {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .stage-split-arena {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stage-arena-centre {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.stage-arena-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   STAGE 1 — CURRENT GAME STATE
+   ========================================================================== */
+.stage-1-layout {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .stage-1-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stage-board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stage-large-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 110px);
+  grid-template-rows: repeat(3, 110px);
+  gap: 10px;
+  background: rgba(14, 22, 43, 0.7);
+  padding: 16px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(22, 139, 255, 0.1);
+}
+
+.stage-large-cell {
+  background: var(--bg-surface-1);
+  border: 1px solid rgba(22, 139, 255, 0.2);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cell-empty-highlight {
+  border: 1px dashed var(--accent-blue-bright);
+  background: rgba(22, 139, 255, 0.08);
+  box-shadow: 0 0 15px rgba(22, 139, 255, 0.2);
+  animation: pulseGlowCell 2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGlowCell {
+  0% { box-shadow: 0 0 8px rgba(22, 139, 255, 0.2); }
+  100% { box-shadow: 0 0 20px rgba(22, 139, 255, 0.5); }
+}
+
+.cell-coord-tag {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.cell-empty-target {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--accent-blue-bright);
+  letter-spacing: 0.06em;
+}
+
+.stage-info-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stage-next-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-cyan);
+  font-size: 13px;
+  margin-top: 14px;
+}
+
+/* ==========================================================================
+   STAGE 2 — AVAILABLE MOVES
+   ========================================================================== */
+.available-moves-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.available-pos-card {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.available-pos-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-blue-bright);
+  box-shadow: 0 8px 25px var(--accent-blue-glow);
+}
+
+.pos-card-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pos-card-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   STAGE 3 — EXPLORE POSSIBILITIES (LOOKAHEAD SEQUENCE)
+   ========================================================================== */
+.branch-explorer-card {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.branch-explorer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 12px;
+}
+
+.branch-flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.flow-step-box {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 160px;
+  flex: 1;
+}
+
+.flow-step-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.flow-step-sub {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.flow-step-ai {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 16px var(--accent-blue-glow);
+}
+
+.flow-step-human {
+  border-color: #F87171;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.25);
+}
+
+.flow-step-outcome {
+  border-color: #10B981;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+}
+
+.flow-arrow {
+  color: var(--accent-blue-bright);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   STAGE 4 — MAX AND MIN DUALITY
+   ========================================================================== */
+.max-min-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+@media (max-width: 900px) {
+  .max-min-split-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.max-min-card {
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.max-card {
+  background: linear-gradient(180deg, rgba(22, 139, 255, 0.12) 0%, var(--bg-surface-2) 100%);
+  border: 1px solid var(--accent-blue-bright);
+  box-shadow: 0 0 25px var(--accent-blue-glow);
+}
+
+.min-card {
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.08) 0%, var(--bg-surface-2) 100%);
+  border: 1px solid var(--accent-cyan);
+  box-shadow: 0 0 25px var(--accent-cyan-glow);
+}
+
+.card-role-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.max-min-bullet-list {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+}
+
+.alternating-levels-box {
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.levels-flow-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.level-tag {
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.max-tag {
+  background: var(--accent-blue-dim);
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue-bright);
+}
+
+.min-tag {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* ==========================================================================
+   STAGE 5 — EVALUATE TERMINAL OUTCOMES
+   ========================================================================== */
+.terminal-convention-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.convention-card {
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.conv-win {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid #10B981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.conv-win .conv-score {
+  color: #34D399;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.conv-draw {
+  background: rgba(100, 116, 139, 0.15);
+  border: 1px solid #64748B;
+}
+
+.conv-draw .conv-score {
+  color: #94A3B8;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.conv-loss {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid #EF4444;
+}
+
+.conv-loss .conv-score {
+  color: #F87171;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.conv-label {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.conv-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.terminal-samples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px;
+}
+
+.terminal-sample-card {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-term-win {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.card-term-draw {
+  border-color: rgba(100, 116, 139, 0.5);
+}
+
+.card-term-loss {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* ==========================================================================
+   STAGE 6 — BACKTRACKING
+   ========================================================================== */
+.backtrack-animation-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backtrack-tree-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.backtrack-node-box {
+  padding: 14px 24px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+}
+
+.parent-box {
+  border-color: var(--accent-blue-bright);
+  background: linear-gradient(180deg, rgba(22, 139, 255, 0.15) 0%, var(--bg-surface-2) 100%);
+  box-shadow: 0 0 25px var(--accent-blue-glow);
+}
+
+.backtrack-arrow-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  color: #34D399;
+}
+
+.up-flow-arrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  animation: bounceUp 1.2s infinite ease-in-out;
+}
+
+@keyframes bounceUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.backtrack-children-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.backtrack-child-box {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 110px;
+}
+
+.child-optimal {
+  border-color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+}
+
+/* ==========================================================================
+   STAGE 7 — OPTIMAL MOVE FOUND (DRAMATIC HERO)
+   ========================================================================== */
+.optimal-final-hero {
+  padding: 28px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, rgba(22, 139, 255, 0.14) 0%, rgba(10, 15, 29, 0.95) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-color: var(--accent-blue-bright);
+  box-shadow: 0 0 45px var(--accent-blue-glow);
+}
+
+.optimal-hero-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  background: var(--accent-blue-dim);
+  border: 1px solid var(--accent-blue-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #34D399;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+}
+
+.optimal-hero-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .optimal-hero-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.optimal-board-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.optimal-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.optimal-metric-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.btn-execute-giant {
+  padding: 16px 36px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0 35px var(--accent-blue-glow);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   MODAL FOOTER
+   ========================================================================== */
+.modal-footer {
+  padding: 14px 28px;
+  background: rgba(10, 15, 29, 0.95);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Stagger animation */
+.animate-stagger {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* ==========================================================================
+   SIMPLIFIED 4-STEP AI EXPLANATION MODAL STYLES
+   ========================================================================== */
+
+.simple-modal-container {
+  width: min(94vw, 1020px) !important;
+  height: auto !important;
+  max-height: 94vh !important;
+  border-radius: 28px !important;
+  border: 2px solid rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85),
+              0 0 50px rgba(56, 189, 248, 0.25) !important;
+  overflow-y: auto !important;
+}
+
+/* Step tracker pills row */
+.simple-steps-tracker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 14px 24px;
+  background: rgba(18, 27, 48, 0.95);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.step-tracker-pill {
+  background: rgba(25, 36, 64, 0.7);
+  border: 1.5px solid var(--border-subtle);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--text-secondary);
+}
+
+.step-tracker-pill:hover {
+  background: rgba(33, 48, 84, 0.9);
+  border-color: var(--cute-sky);
+  color: #FFFFFF;
+}
+
+.step-tracker-pill.active {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: var(--cute-sky);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+}
+
+.step-tracker-pill.completed {
+  border-color: rgba(52, 211, 153, 0.5);
+  color: var(--cute-mint);
+}
+
+.step-pill-number {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-tracker-pill.active .step-pill-number {
+  background: var(--cute-sky);
+  color: #0C1222;
+  border-color: var(--cute-sky);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+.step-tracker-pill.completed .step-pill-number {
+  background: rgba(52, 211, 153, 0.2);
+  color: var(--cute-mint);
+  border-color: var(--cute-mint);
+}
+
+.step-pill-title {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Modal Body: 2 Columns */
+.simple-modal-body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  padding: 24px;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .simple-modal-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.simple-robot-host-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.simple-robot-avatar-box {
+  padding: 10px 0;
+  filter: drop-shadow(0 10px 25px rgba(56, 189, 248, 0.3));
+}
+
+.step-badge-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--cute-sky);
+  background: rgba(56, 189, 248, 0.12);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.simple-step-card-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+}
+
+.simple-step-header-banner {
+  text-align: center;
+  background: rgba(18, 27, 48, 0.8);
+  border: 1.5px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 12px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.simple-step-heading {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.simple-step-subtext {
+  font-size: 13.5px;
+  color: var(--cute-sky);
+  margin: 4px 0 0 0;
+}
+
+.simple-board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell-hovered-candidate {
+  border-color: var(--cute-lavender) !important;
+  background: rgba(192, 132, 252, 0.18) !important;
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.45) !important;
+}
+
+.cell-optimal-selected {
+  border: 2.5px solid var(--cute-yellow) !important;
+  background: rgba(251, 191, 36, 0.16) !important;
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.6) !important;
+  animation: cuteWinPulse 1.4s infinite alternate ease-in-out !important;
+}
+
+.simple-step-detail-card {
+  width: 100%;
+  background: rgba(18, 27, 48, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.simple-candidates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.simple-candidate-pill {
+  background: rgba(25, 36, 64, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.simple-candidate-pill:hover,
+.simple-candidate-pill.hovered {
+  background: rgba(33, 48, 84, 0.95);
+  border-color: var(--cute-lavender);
+  box-shadow: 0 0 14px rgba(192, 132, 252, 0.35);
+  transform: translateY(-2px);
+}
+
+.simple-candidate-pill.is-best {
+  border-color: var(--cute-mint);
+  background: rgba(52, 211, 153, 0.1);
+}
+
+.cand-pos-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.cand-num {
+  color: var(--text-muted);
+}
+
+.cand-badge-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.simple-best-move-card {
+  border-color: rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.08);
+  box-shadow: 0 0 24px rgba(251, 191, 36, 0.15);
+}
+
+.best-move-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+}
+
+.best-move-reason-quote {
+  margin-top: 8px;
+}
+
+.quote-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cute-yellow);
+  font-family: var(--font-sans);
+  margin: 0;
+  text-shadow: 0 0 16px rgba(251, 191, 36, 0.4);
+}
+
+.simple-execute-card {
+  border-color: rgba(52, 211, 153, 0.4);
+  background: rgba(52, 211, 153, 0.08);
+}
+
+.btn-execute-prominent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-execute-prominent:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.7);
+}
+
+/* Footer Navigation */
+.simple-modal-footer {
+  padding: 14px 24px;
+  background: rgba(14, 21, 38, 0.95);
+  border-top: 1.5px solid rgba(56, 189, 248, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.step-count-indicator {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.btn-step-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(25, 36, 64, 0.8);
+  border: 1.5px solid var(--border-subtle);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-step-nav:hover:not(:disabled) {
+  background: rgba(33, 48, 84, 0.95);
+  border-color: var(--cute-sky);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+.btn-step-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-step-next {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(192, 132, 252, 0.25) 100%);
+  border-color: var(--cute-sky);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+.btn-step-next:hover {
+  background: linear-gradient(135deg, #0284C7 0%, #7C3AED 100%);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+.btn-step-execute {
+  background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+  border-color: #34D399;
+  color: #FFFFFF;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.45);
+}
+
+.btn-step-execute:hover {
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.7);
+}
+
