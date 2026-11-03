@@ -176,7 +176,7 @@ minimax-ai-lab/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/nilamagarwal/minimax-ai-lab.git
+git clone https://github.com/nilam-codes/minimax-ai-lab.git
 cd minimax-ai-lab
 ```
 
